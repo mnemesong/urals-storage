@@ -1,5 +1,4 @@
 --library sneaker
---library result
 --class-path src
 --class-path stubs
 --class-path test

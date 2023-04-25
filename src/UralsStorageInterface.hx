@@ -1,7 +1,6 @@
 package;
 
 import UralsStorageTypes;
-import result.Result;
 
 interface UralsStorageInterface<M, IdType>
 {

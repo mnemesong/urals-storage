@@ -2,7 +2,6 @@ package;
 
 import sneaker.assertion.Asserter.*;
 
-
 function test1() {
     var output = "";
     var stor = new UralsStaticStorageStub();

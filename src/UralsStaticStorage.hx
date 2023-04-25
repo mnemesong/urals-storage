@@ -1,7 +1,6 @@
 package;
 
 import UralsStorageTypes;
-import result.Result;
 
 abstract class UralsStaticStorage<M, IdType> 
     implements UralsStorageInterface<M, IdType>
