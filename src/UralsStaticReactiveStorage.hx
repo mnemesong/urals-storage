@@ -2,6 +2,9 @@ package;
 
 import UralsStorageTypes;
 
+/**
+    class implements reactive static storage type
+**/
 abstract class UralsStaticReactiveStorage<M, IdType> 
     implements UralsStorageInterface<M, IdType>
 {
@@ -20,6 +23,9 @@ abstract class UralsStaticReactiveStorage<M, IdType>
         this.onRemoveTrigger = onRemoveTrigger;
     }
 
+    /**
+        Read all data from storage
+    **/
     public function readAll(): Array<UralsStored<M, IdType>>
     {
         var result = Reflect.copy(this.els);
@@ -27,6 +33,9 @@ abstract class UralsStaticReactiveStorage<M, IdType>
         return result;
     }
 
+    /**
+        Read data from storage by identifiers
+    **/
     public function readMany(
         ids: Array<IdType>
     ): Array<UralsStored<M, IdType>> {
@@ -35,14 +44,23 @@ abstract class UralsStaticReactiveStorage<M, IdType>
         return result;
     }
 
+    /**
+        function wrap new data to Stored type, add new ids
+    **/
     abstract private function setId(data: Array<M>): Array<UralsStored<M, IdType>>;
 
+    /**
+        Add some data in the end of storage
+    **/
     public function addMany(data: Array<M>): Void
     {
         var result = this.setId(Reflect.copy(data));
         this.setMany(result);
     }
 
+    /**
+        Removes many records from storage by ids
+    **/
     public function removeMany(ids: Array<IdType>): Void
     {
         var toDelete = [];
@@ -58,6 +76,9 @@ abstract class UralsStaticReactiveStorage<M, IdType>
         this.els = toSave;
     }
 
+    /**
+        Set and rewrite many records to storage by ids
+    **/
     public function setMany(data: Array<UralsStored<M, IdType>>): Void
     {
         if(onSetTrigger != null) onSetTrigger(data);
