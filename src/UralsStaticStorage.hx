@@ -8,6 +8,9 @@ abstract class UralsStaticStorage<M, IdType>
 {
     private var els: Array<UralsStored<M, IdType>> = [];
 
+    public function new() {
+    }
+
     public function readAll(): Array<UralsStored<M, IdType>>
     {
         var result = Reflect.copy(this.els);
@@ -33,7 +36,7 @@ abstract class UralsStaticStorage<M, IdType>
         {
             var toSave = [];
             for (i in 0...this.els.length) {
-                if(ids.filter(id -> id != this.els[i].id).length > 0) {
+                if(ids.filter(id -> id == this.els[i].id).length == 0) {
                     toSave.push(this.els[i]);
                 } 
             }
