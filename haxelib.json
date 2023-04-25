@@ -1,0 +1,14 @@
+{
+    "name": "urals-storage",
+    "url" : "https://github.com/mnemesong/urals-storage",
+    "license": "MIT",
+    "tags": ["haxe", "storage", "urals"],
+    "description": "Storage types and classes for Urals tools",
+    "version": "0.0.1",
+    "releasenote": "Release",
+    "contributors": ["Anatoly_Starodubtsev"],
+    "dependencies": {
+      "result": ""
+    },
+    "classPath": "src/"
+  }
