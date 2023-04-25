@@ -3,7 +3,6 @@ package;
 import sneaker.assertion.Asserter.*;
 
 function test1() {
-    var output = "";
     var stor = new UralsStaticStorageStub();
     stor.addMany(["alala", "blablabla", "ohoho"]);
     var readedAll = stor.readAll();
@@ -22,24 +21,7 @@ function test1() {
 
 
 function test2() {
-    var output = "";
-    var stor = new UralsReactiveStorageStub(
-        (els) -> {
-            output = output + els
-            .map(e -> 'sets(id: ${Std.string(e.id)}, val: ${e.val})\n')
-            .join("");
-        },
-        (els) -> {
-            output = output + els
-            .map(e -> 'gets(id: ${Std.string(e.id)}, val: ${e.val})\n')
-            .join("");
-        },
-        (els) -> {
-            output = output + els
-            .map(e -> 'removes(id: ${Std.string(e.id)}, val: ${e.val})\n')
-            .join("");
-        }
-    );
+    var stor = new UralsStaticStorageStub();
     stor.setMany([{id: 2, val: "blablabla"}, {id: 3, val: "ohoho"}]);
     var readedAll = stor.readMany([3]);
     assert(readedAll[0].id == 3);
