@@ -2,6 +2,9 @@ package;
 
 import UralsStorageTypes;
 
+/**
+    class implements static storage type
+**/
 abstract class UralsStaticStorage<M, IdType> 
     implements UralsStorageInterface<M, IdType>
 {

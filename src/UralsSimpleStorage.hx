@@ -4,9 +4,12 @@ import UralsStorageTypes;
 
 using Lambda;
 
-class UralsStaticStorageStub extends UralsStaticStorage<String, Int>
+/**
+    class implements simple static storage type with integer ids
+**/
+class UralsSimpleStorage<M> extends UralsStaticStorage<M, Int>
 {
-    private function setId(data: Array<String>): Array<UralsStored<String, Int>>
+    private function setId(data: Array<M>): Array<UralsStored<M, Int>>
     {
         var maxId = this.els
             .map(el -> el.id)
