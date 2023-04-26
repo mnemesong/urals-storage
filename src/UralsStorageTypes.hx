@@ -13,3 +13,5 @@ typedef UralsStored<M, IdType> = {
 **/
 typedef UralsStorageTriggerFunc<M, IdType> = 
     (data: Array<UralsStored<M, IdType>>) -> Void;
+
+typedef UralsSetIdFunc<M, Id> = (data: Array<M>) -> Array<UralsStored<M, Id>>
