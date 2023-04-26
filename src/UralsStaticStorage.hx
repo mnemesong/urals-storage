@@ -78,4 +78,13 @@ abstract class UralsStaticStorage<M, IdType>
             }
         }
     }
+
+    /**
+        Rewrte all storage data
+    **/
+    public function reInit(data: Array<M>): Void
+    {
+        this.els = [];
+        this.addMany(data);
+    }
 }

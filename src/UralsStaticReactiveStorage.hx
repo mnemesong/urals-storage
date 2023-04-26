@@ -6,21 +6,19 @@ import UralsStorageTypes;
     class implements reactive static storage type
 **/
 abstract class UralsStaticReactiveStorage<M, IdType> 
-    implements UralsStorageInterface<M, IdType>
+    implements UralsStorageInterface<M, IdType> 
+    implements UralsReactiveStorageInterface
 {
-    private var onSetTrigger: UralsStorageTriggerFunc<M, IdType> = null;
+    private var onChangeTrigger: UralsStorageTriggerFunc<M, IdType> = null;
     private var onReadTrigger: UralsStorageTriggerFunc<M, IdType> = null;
-    private var onRemoveTrigger: UralsStorageTriggerFunc<M, IdType> = null;
     private var els: Array<UralsStored<M, IdType>> = [];
 
     public function new(
         onSetTrigger: UralsStorageTriggerFunc<M, IdType> = null, 
-        onReadTrigger: UralsStorageTriggerFunc<M, IdType> = null,
-        onRemoveTrigger: UralsStorageTriggerFunc<M, IdType> = null
+        onReadTrigger: UralsStorageTriggerFunc<M, IdType> = null
     ) {
-        this.onSetTrigger = onSetTrigger;
+        this.onChangeTrigger = onSetTrigger;
         this.onReadTrigger = onReadTrigger;
-        this.onRemoveTrigger = onRemoveTrigger;
     }
 
     /**
@@ -29,7 +27,7 @@ abstract class UralsStaticReactiveStorage<M, IdType>
     public function readAll(): Array<UralsStored<M, IdType>>
     {
         var result = Reflect.copy(this.els);
-        if(onReadTrigger != null) onReadTrigger(result);
+        this.triggerOnRead();
         return result;
     }
 
@@ -40,7 +38,7 @@ abstract class UralsStaticReactiveStorage<M, IdType>
         ids: Array<IdType>
     ): Array<UralsStored<M, IdType>> {
         var result = this.els.filter(el -> ids.filter(id -> id == el.id).length > 0);
-        if(onReadTrigger != null) onReadTrigger(result);
+        triggerOnRead();
         return result;
     }
 
@@ -72,8 +70,8 @@ abstract class UralsStaticReactiveStorage<M, IdType>
                 toSave.push(this.els[i]);
             }
         }
-        if(onRemoveTrigger != null) onRemoveTrigger(Reflect.copy(toDelete));
         this.els = toSave;
+        triggerOnChange();
     }
 
     /**
@@ -81,7 +79,6 @@ abstract class UralsStaticReactiveStorage<M, IdType>
     **/
     public function setMany(data: Array<UralsStored<M, IdType>>): Void
     {
-        if(onSetTrigger != null) onSetTrigger(data);
         for (i in 0...data.length) {
             var isExist = false;
             for (j in 0...(this.els).length) {
@@ -94,5 +91,31 @@ abstract class UralsStaticReactiveStorage<M, IdType>
                 this.els.push(data[i]);
             }
         }
+        triggerOnChange();
+    }
+
+    /**
+        Rewrte all storage data
+    **/
+    public function reInit(data: Array<M>): Void
+    {
+        this.els = [];
+        this.addMany(data);
+    }
+
+    /**
+        directly trigger onchange funciton
+    **/
+    public function triggerOnChange(): Void
+    {
+        if(onChangeTrigger != null) this.onChangeTrigger(this.els);
+    }
+
+    /**
+        directly trigger onreadfunciton
+    **/
+    public function triggerOnRead(): Void
+    {
+        if(onReadTrigger != null) this.onReadTrigger(this.els);
     }
 }

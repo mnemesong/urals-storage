@@ -14,11 +14,6 @@ function test1() {
             output = output + els
             .map(e -> 'gets(id: ${Std.string(e.id)}, val: ${e.val})\n')
             .join("");
-        },
-        (els) -> {
-            output = output + els
-            .map(e -> 'removes(id: ${Std.string(e.id)}, val: ${e.val})\n')
-            .join("");
         }
     );
     stor.addMany(["alala", "blablabla", "ohoho"]);
@@ -42,8 +37,7 @@ function test1() {
         + 'gets(id: 1, val: alala)\n' 
         + 'gets(id: 2, val: blablabla)\n'
         + 'gets(id: 3, val: ohoho)\n'
-        + 'removes(id: 1, val: alala)\n'
-        + 'removes(id: 2, val: blablabla)\n'
+        + 'sets(id: 3, val: ohoho)\n'
         + 'gets(id: 3, val: ohoho)\n'));
 }
 
@@ -59,11 +53,6 @@ function test2() {
         (els) -> {
             output = output + els
             .map(e -> 'gets(id: ${Std.string(e.id)}, val: ${e.val})\n')
-            .join("");
-        },
-        (els) -> {
-            output = output + els
-            .map(e -> 'removes(id: ${Std.string(e.id)}, val: ${e.val})\n')
             .join("");
         }
     );
@@ -83,8 +72,10 @@ function test2() {
     assert(output == 
         ( 'sets(id: 2, val: blablabla)\n'
         + 'sets(id: 3, val: ohoho)\n'
+        + 'gets(id: 2, val: blablabla)\n'
         + 'gets(id: 3, val: ohoho)\n'
         + 'sets(id: 2, val: gagaga)\n'
+        + 'sets(id: 3, val: ohoho)\n'
         + 'sets(id: 1, val: alala)\n'
         + 'gets(id: 2, val: gagaga)\n'
         + 'gets(id: 3, val: ohoho)\n'
