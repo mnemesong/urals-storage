@@ -4,8 +4,8 @@
     "license": "MIT",
     "tags": ["haxe", "storage", "urals"],
     "description": "Storage types and classes for Urals tools",
-    "version": "0.0.1",
-    "releasenote": "Release",
+    "version": "0.1.1",
+    "releasenote": "Change api, expand sotrage types, add id-gen functions",
     "contributors": ["Anatoly_Starodubtsev"],
     "dependencies": {
       "uuid": ""
