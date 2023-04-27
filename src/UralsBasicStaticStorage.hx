@@ -2,6 +2,9 @@ package;
 
 import UralsStorageTypes;
 
+/**
+    Mininal basic static storage
+**/
 class UralsBasicStaticStorage<M, Id> 
     implements UralsBasicStorageInterface<M, Id>
 {

@@ -4,6 +4,9 @@ import UralsStorageTypes;
 
 using Lambda;
 
+/**
+    Function generates Int id and wraps new data into it
+**/
 function genIntId<M>(
     newData: Array<M>, 
     keepedData: Array<Int>

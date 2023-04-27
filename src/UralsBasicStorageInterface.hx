@@ -2,6 +2,9 @@ package;
 
 import UralsStorageTypes;
 
+/**
+    Interface of minimal storage
+**/
 interface UralsBasicStorageInterface<M, IdType>
 {
     /**

@@ -2,6 +2,9 @@ package;
 
 import UralsStorageTypes;
 
+/**
+    Basic storage triggers function of set and read data
+**/
 class UralsBasicReactiveStorage<M, Id> 
     implements UralsBasicStorageInterface<M, Id>
     implements UralsReactiveStorageInterface
