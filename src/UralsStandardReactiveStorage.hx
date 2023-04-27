@@ -29,7 +29,7 @@ class UralsStandardReactiveStorage<M, IdType>
     **/
     public function readAll(): Array<UralsStored<M, IdType>>
     {
-        var result = Reflect.copy(this.els);
+        var result = this.els;
         this.triggerOnRead();
         return result;
     }
