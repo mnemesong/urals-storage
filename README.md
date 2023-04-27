@@ -26,18 +26,31 @@ var readedAll = stor.readAll();
 ```
 
 
-## Urals storage interface API
+## UralsBasicStorageInterface API
 ```haxe
- /**
-    Interface represents storage
-**/
-interface UralsStorageInterface<M, IdType>
+interface UralsBasicStorageInterface<M, IdType>
 {
     /**
         Read all data from storage
     **/
     public function readAll(): Array<UralsStored<M, IdType>>;
 
+    /**
+        Rewrte all storage data
+    **/
+    public function reInit(data: Array<M>): Void;
+}
+```
+
+
+## UralsStandardStorageInterface API
+```haxe
+ /**
+    Interface represents storage
+**/
+interface UralsStandardStorageInterface<M, IdType> 
+    extends UralsBasicStorageInterface<M, IdType>
+{
     /**
         Read data from storage by identifiers
     **/

@@ -27,6 +27,7 @@ class UralsBasicReactiveStorage<M, Id>
     public function readAll(): Array<UralsStored<M, Id>>
     {
         var result = Reflect.copy(this.els);
+        triggerOnRead();
         return result;
     }
 
@@ -37,8 +38,8 @@ class UralsBasicReactiveStorage<M, Id>
     public function reInit(data: Array<M>): Void
     {
         this.els = [];
-        this.els = this.setId(data);
-
+        this.els = this.setId(data, []);
+        triggerOnChange();
     }
 
     /**

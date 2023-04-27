@@ -5,12 +5,14 @@ import UralsStorageTypes;
 /**
     class implements static storage type
 **/
-abstract class UralsStaticStorage<M, IdType> 
-    implements UralsStorageInterface<M, IdType>
+class UralsStandardStaticStorage<M, IdType> 
+    implements UralsStandardStorageInterface<M, IdType>
 {
+    private var setIds: UralsSetIdFunc<M, IdType> = null;
     private var els: Array<UralsStored<M, IdType>> = [];
 
-    public function new() {
+    public function new(setId: UralsSetIdFunc<M, IdType>) {
+        this.setIds = setId;
     }
 
     /**
@@ -33,16 +35,11 @@ abstract class UralsStaticStorage<M, IdType>
     }
 
     /**
-        function wrap new data to Stored type, add new ids
-    **/
-    abstract private function setId(data: Array<M>): Array<UralsStored<M, IdType>>;
-
-    /**
         Add some data in the end of storage
     **/
     public function addMany(data: Array<M>): Void
     {
-        var result = this.setId(Reflect.copy(data));
+        var result = this.setIds(data, this.els.map(el -> el.id));
         this.setMany(result);
     }
 

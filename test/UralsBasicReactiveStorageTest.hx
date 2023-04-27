@@ -1,10 +1,12 @@
 package;
 
+import UralsIdGenFunctions.genIntId;
 import sneaker.assertion.Asserter.*;
 
 function test1() {
     var output = "";
-    var stor = new UralsReactiveStorageStub(
+    var stor = new UralsBasicReactiveStorage(
+        genIntId,
         (els) -> {
             output = output + els
             .map(e -> 'sets(id: ${Std.string(e.id)}, val: ${e.val})\n')

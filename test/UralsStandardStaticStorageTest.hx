@@ -1,9 +1,10 @@
 package;
 
+import UralsIdGenFunctions.genIntId;
 import sneaker.assertion.Asserter.*;
 
 function test1() {
-    var stor = new UralsSimpleStorage<String>();
+    var stor = new UralsStandardStaticStorage(genIntId);
     stor.addMany(["alala", "blablabla", "ohoho"]);
     var readedAll = stor.readAll();
     assert(readedAll[0].id == 1);
@@ -21,7 +22,7 @@ function test1() {
 
 
 function test2() {
-    var stor = new UralsSimpleStorage();
+    var stor = new UralsStandardStaticStorage(genIntId);
     stor.setMany([{id: 2, val: "blablabla"}, {id: 3, val: "ohoho"}]);
     var readedAll = stor.readMany([3]);
     assert(readedAll[0].id == 3);
@@ -38,7 +39,7 @@ function test2() {
 }
 
 function test3() {
-    var stor = new UralsSimpleStorage();
+    var stor = new UralsStandardStaticStorage(genIntId);
     stor.setMany([{id: 2, val: "blablabla"}, {id: 3, val: "ohoho"}]);
     var readedAll = stor.readMany([3]);
     assert(readedAll[0].id == 3);

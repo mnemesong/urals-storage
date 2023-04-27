@@ -5,7 +5,8 @@ import UralsStorageTypes;
 /**
     Interface represents storage
 **/
-interface UralsStorageInterface<M, IdType> extends UralsBasicStorageInterface<M, IdType>
+interface UralsStandardStorageInterface<M, IdType> 
+    extends UralsBasicStorageInterface<M, IdType>
 {
     /**
         Read data from storage by identifiers

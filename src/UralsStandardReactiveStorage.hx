@@ -5,18 +5,21 @@ import UralsStorageTypes;
 /**
     class implements reactive static storage type
 **/
-abstract class UralsStaticReactiveStorage<M, IdType> 
-    implements UralsStorageInterface<M, IdType> 
+class UralsStandardReactiveStorage<M, IdType> 
+    implements UralsStandardStorageInterface<M, IdType> 
     implements UralsReactiveStorageInterface
 {
+    private var setIds: UralsSetIdFunc<M, IdType> = null;
     private var onChangeTrigger: UralsStorageTriggerFunc<M, IdType> = null;
     private var onReadTrigger: UralsStorageTriggerFunc<M, IdType> = null;
     private var els: Array<UralsStored<M, IdType>> = [];
 
     public function new(
+        setIds: UralsSetIdFunc<M, IdType>,
         onSetTrigger: UralsStorageTriggerFunc<M, IdType> = null, 
         onReadTrigger: UralsStorageTriggerFunc<M, IdType> = null
     ) {
+        this.setIds = setIds;
         this.onChangeTrigger = onSetTrigger;
         this.onReadTrigger = onReadTrigger;
     }
@@ -43,16 +46,11 @@ abstract class UralsStaticReactiveStorage<M, IdType>
     }
 
     /**
-        function wrap new data to Stored type, add new ids
-    **/
-    abstract private function setId(data: Array<M>): Array<UralsStored<M, IdType>>;
-
-    /**
         Add some data in the end of storage
     **/
     public function addMany(data: Array<M>): Void
     {
-        var result = this.setId(Reflect.copy(data));
+        var result = this.setIds(data, this.els.map(el -> el.id));
         this.setMany(result);
     }
 

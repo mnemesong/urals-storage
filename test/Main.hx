@@ -3,8 +3,8 @@ package;
 class Main 
 {
     public static function main() {
-        UralsStaticReactiveStorageTest.main();
-        UralsSimpleStorageTest.main();
+        UralsStandardReactiveStorageTest.main();
+        UralsStandardStaticStorageTest.main();
         UralsBasicReactiveStorageTest.main();
     }
 }
