@@ -8,6 +8,7 @@
     "releasenote": "Release",
     "contributors": ["Anatoly_Starodubtsev"],
     "dependencies": {
+      "uuid": ""
     },
     "classPath": "src/"
   }

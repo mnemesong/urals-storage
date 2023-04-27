@@ -28,6 +28,9 @@ var readedAll = stor.readAll();
 
 ## UralsBasicStorageInterface API
 ```haxe
+/**
+    Interface of minimal storage
+**/
 interface UralsBasicStorageInterface<M, IdType>
 {
     /**
@@ -45,7 +48,7 @@ interface UralsBasicStorageInterface<M, IdType>
 
 ## UralsStandardStorageInterface API
 ```haxe
- /**
+/**
     Interface represents storage
 **/
 interface UralsStandardStorageInterface<M, IdType> 
@@ -78,24 +81,36 @@ interface UralsStandardStorageInterface<M, IdType>
 ```
 
 
-## Classes realizaion
+## UralsReactiveStorageInterface API
 ```haxe
 /**
-    Class implements reactive static storage type
+    Reactive storage interface
 **/
-abstract class UralsStaticReactiveStorage<M, IdType> 
-    implements UralsStorageInterface<M, IdType> {...}
+interface UralsReactiveStorageInterface 
+{
+    public function triggerOnChange(): Void;
 
-/**
-    class implements static storage type
-**/
-abstract class UralsStaticStorage<M, IdType> 
-    implements UralsStorageInterface<M, IdType> {...}
+    public function triggerOnRead(): Void;
+}
+```
 
-/**
-    Class implements simple static storage type with integer ids
-**/
-class UralsSimpleStorage<M> extends UralsStaticStorage<M, Int> {...}
+
+## Classes realizaion
+```haxe
+class UralsBasicStaticStorage<M, Id> 
+    implements UralsBasicStorageInterface<M, Id> {...}
+
+class UralsBasicReactiveStorage<M, Id> 
+    implements UralsBasicStorageInterface<M, Id>
+    implements UralsReactiveStorageInterface {...}
+
+class UralsStandardStaticStorage<M, IdType> 
+    implements UralsStandardStorageInterface<M, IdType> {...}
+
+class UralsStandardReactiveStorage<M, IdType> 
+    implements UralsStandardStorageInterface<M, IdType> 
+    implements UralsReactiveStorageInterface {...}
+
 ```
 
 
@@ -114,6 +129,14 @@ typedef UralsStored<M, IdType> = {
 **/
 typedef UralsStorageTriggerFunc<M, IdType> = 
     (data: Array<UralsStored<M, IdType>>) -> Void;
+
+/**
+    Generates Id function type
+**/
+typedef UralsSetIdFunc<M, Id> = (
+    newData: Array<M>, 
+    keepedDataIds: Array<Id>
+) -> Array<UralsStored<M, Id>>
 ```
 
 
