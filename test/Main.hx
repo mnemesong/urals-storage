@@ -6,5 +6,6 @@ class Main
         UralsStandardReactiveStorageTest.main();
         UralsStandardStaticStorageTest.main();
         UralsBasicReactiveStorageTest.main();
+        UralsBasicStaticStorageTest.main();
     }
 }
