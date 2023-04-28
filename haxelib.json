@@ -4,7 +4,7 @@
     "license": "MIT",
     "tags": ["haxe", "storage", "urals"],
     "description": "Storage types and classes for Urals tools",
-    "version": "0.2.1",
+    "version": "0.3.1",
     "releasenote": "Rename all classes and namespaces",
     "contributors": ["Anatoly_Starodubtsev"],
     "dependencies": {
