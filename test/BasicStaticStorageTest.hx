@@ -1,7 +1,6 @@
 package;
 
 import urals.storage.IdGenFunctions.genUuidId;
-import urals.storage.IdGenFunctions.genIntId;
 import urals.storage.BasicStaticStorage;
 import sneaker.assertion.Asserter.*;
 

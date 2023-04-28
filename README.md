@@ -8,35 +8,50 @@ It may be used for incapsulates some complexity mechanics, for example on action
 triggers, web communications and other functions under basic storage interface.
 
 
+## Contains
+- BasicStorageInterface and StandardStorageInterface (has extra api)
+- ReactiveStorageInterface (for storages, should trigger effect on changing)
+- Storage classes, implements this interfaces
+- id-generation functions for strages initialization
+
+
+## Usage
+As client-side storage and as runtime-only-alive storages on server.
+Interfaces in this package may be used for decoupling your program and storage realizations
+
+
 ## Requirements
 Package tested for Haxe >= 4.0.
 The functionality or it missing of the package for lesser versions has not been tested.
 
 
-## Example of usage
+## Example of usage Static Storage
 ```haxe
-var stor = new UralsSimpleStorage<String>();
-stor.addMany(["alala", "blablabla", "ohoho"]);
-var readedAll = stor.readAll();
-// [{id: 1, val: "alala"}, {id: 2, val: "blablabla"}, {id: 3, val: "ohoho"}]
+import urals.storage.IdGenFunctions.genUuidId;
+import urals.storage.BasicStaticStorage;
 
-stor.removeMany([0, 1, 2]); //id: 0 not exist and will be ignored
+var stor = new BasicStaticStorage(
+    genUuidId
+);
+stor.reInit(["alala", "blablabla", "ohoho"]);
 var readedAll = stor.readAll();
-// [{id: 3, val: "ohoho"}]
+// {id: 1, val: "alala"}
+// {id: 2, val: "blablabla"}
+// {id: 3, val: "ohoho"}
 ```
 
 
-## UralsBasicStorageInterface API
+## BasicStorageInterface API
 ```haxe
 /**
     Interface of minimal storage
 **/
-interface UralsBasicStorageInterface<M, IdType>
+interface BasicStorageInterface<M, IdType>
 {
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<UralsStored<M, IdType>>;
+    public function readAll(): Array<Entity<M, IdType>>;
 
     /**
         Rewrte all storage data
@@ -46,20 +61,20 @@ interface UralsBasicStorageInterface<M, IdType>
 ```
 
 
-## UralsStandardStorageInterface API
+## StandardStorageInterface API
 ```haxe
 /**
     Interface represents storage
 **/
-interface UralsStandardStorageInterface<M, IdType> 
-    extends UralsBasicStorageInterface<M, IdType>
+interface StandardStorageInterface<M, IdType> 
+    extends BasicStorageInterface<M, IdType>
 {
     /**
         Read data from storage by identifiers
     **/
     public function readMany(
         ids: Array<IdType>
-    ): Array<UralsStored<M, IdType>>;
+    ): Array<Entity<M, IdType>>;
 
     /**
         Add some data in the end of storage
@@ -76,17 +91,17 @@ interface UralsStandardStorageInterface<M, IdType>
     /**
         Set and rewrite many records to storage by ids
     **/
-    public function setMany(data: Array<UralsStored<M, IdType>>): Void;
+    public function setMany(data: Array<Entity<M, IdType>>): Void;
 }
 ```
 
 
-## UralsReactiveStorageInterface API
+## ReactiveStorageInterface API
 ```haxe
 /**
     Reactive storage interface
 **/
-interface UralsReactiveStorageInterface 
+interface ReactiveStorageInterface 
 {
     public function triggerOnChange(): Void;
 
@@ -97,31 +112,31 @@ interface UralsReactiveStorageInterface
 
 ## Classes realizaion
 ```haxe
-class UralsBasicStaticStorage<M, Id> 
-    implements UralsBasicStorageInterface<M, Id> {...}
+class BasicStaticStorage<M, Id> 
+    implements BasicStorageInterface<M, Id> {...}
 
-class UralsBasicReactiveStorage<M, Id> 
-    implements UralsBasicStorageInterface<M, Id>
-    implements UralsReactiveStorageInterface {...}
+class BasicReactiveStorage<M, Id> 
+    implements BasicStorageInterface<M, Id>
+    implements ReactiveStorageInterface {...}
 
-class UralsStandardStaticStorage<M, IdType> 
-    implements UralsStandardStorageInterface<M, IdType> {...}
+class StandardStaticStorage<M, IdType> 
+    implements StandardStorageInterface<M, IdType> {...}
 
-class UralsStandardReactiveStorage<M, IdType> 
-    implements UralsStandardStorageInterface<M, IdType> 
-    implements UralsReactiveStorageInterface {...}
+class StandardReactiveStorage<M, IdType> 
+    implements StandardStorageInterface<M, IdType> 
+    implements ReactiveStorageInterface {...}
 
 ```
 
 
-## Types in UralsStorageTypes module
+## Types in StorageTypes module
 ```haxe
-//UralsStorageType.hx
+//StorageType.hx
 
 /**
     Type represents data contains in storage
 **/
-typedef UralsStored<M, IdType> = {
+typedef Entity<M, IdType> = {
     id: IdType,
     val: M
 };
@@ -129,21 +144,21 @@ typedef UralsStored<M, IdType> = {
 /**
     Type represents function triggers on some storage event
 **/
-typedef UralsStorageTriggerFunc<M, IdType> = 
-    (data: Array<UralsStored<M, IdType>>) -> Void;
+typedef StorageTriggerFunc<M, IdType> = 
+    (data: Array<Entity<M, IdType>>) -> Void;
 
 /**
     Generates Id function type
 **/
-typedef UralsSetIdFunc<M, Id> = (
+typedef SetIdFunc<M, Id> = (
     newData: Array<M>, 
     keepedDataIds: Array<Id>
-) -> Array<UralsStored<M, Id>>
+) -> Array<Entity<M, Id>>
 ```
 
 ## Id-gen functions for storages
 ```haxe
-//UralsIdGenFunctions.hx
+//IdGenFunctions.hx
 
 /**
     Function generates Int id and wraps new data into it
@@ -151,9 +166,9 @@ typedef UralsSetIdFunc<M, Id> = (
 function genIntId<M>(
     newData: Array<M>, 
     keepedData: Array<Int>
-): Array<UralsStored<M, Int>> {
+): Array<Entity<M, Int>> {
     var maxId = keepedData.fold((id, maxId: Int) -> maxId > id ? maxId : id, 0);
-    return newData.fold((el: M, m: Array<UralsStored<M, Int>>) 
+    return newData.fold((el: M, m: Array<Entity<M, Int>>) 
         -> m.concat([{id: m.length + maxId + 1, val: el}]), []);
 }
 
@@ -163,8 +178,8 @@ function genIntId<M>(
 function genUuidId<M>(
     newData: Array<M>, 
     keepedData: Array<String>
-): Array<UralsStored<M, String>> {
-    return newData.fold((el: M, m: Array<UralsStored<M, String>>) 
+): Array<Entity<M, String>> {
+    return newData.fold((el: M, m: Array<Entity<M, String>>) 
         -> m.concat([{id: Uuid.v4(), val: el}]), []);
 }
 ```
