@@ -1,6 +1,6 @@
-package;
+package urals.storage;
 
-import UralsStorageTypes;
+import urals.storage.UralsStorageTypes;
 
 /**
     Basic storage triggers function of set and read data

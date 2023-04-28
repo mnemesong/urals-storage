@@ -1,6 +1,6 @@
-package;
+package urals.storage;
 
-import UralsStorageTypes;
+import urals.storage.UralsStorageTypes;
 
 /**
     class implements static storage type

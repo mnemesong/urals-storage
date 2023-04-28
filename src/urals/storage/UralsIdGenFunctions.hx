@@ -1,7 +1,7 @@
-package;
+package urals.storage;
 
 import uuid.Uuid;
-import UralsStorageTypes;
+import urals.storage.UralsStorageTypes;
 
 using Lambda;
 

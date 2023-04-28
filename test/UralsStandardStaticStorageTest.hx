@@ -1,7 +1,8 @@
 package;
 
-import UralsIdGenFunctions.genUuidId;
-import UralsIdGenFunctions.genIntId;
+import urals.storage.UralsIdGenFunctions.genUuidId;
+import urals.storage.UralsIdGenFunctions.genIntId;
+import urals.storage.UralsStandardStaticStorage;
 import sneaker.assertion.Asserter.*;
 
 function test1() {

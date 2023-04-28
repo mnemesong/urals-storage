@@ -1,4 +1,4 @@
-package;
+package urals.storage;
 
 /**
     Type represents data contains in storage
