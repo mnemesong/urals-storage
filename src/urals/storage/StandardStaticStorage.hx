@@ -9,7 +9,7 @@ class StandardStaticStorage<M, IdType>
     implements StandardStorageInterface<M, IdType>
 {
     private var setIds: SetIdFunc<M, IdType> = null;
-    private var els: Array<Stored<M, IdType>> = [];
+    private var els: Array<Entity<M, IdType>> = [];
 
     public function new(setId: SetIdFunc<M, IdType>) {
         this.setIds = setId;
@@ -18,7 +18,7 @@ class StandardStaticStorage<M, IdType>
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<Stored<M, IdType>>
+    public function readAll(): Array<Entity<M, IdType>>
     {
         var result = this.els;
         return result;
@@ -29,7 +29,7 @@ class StandardStaticStorage<M, IdType>
     **/
     public function readMany(
         ids: Array<IdType>
-    ): Array<Stored<M, IdType>> {
+    ): Array<Entity<M, IdType>> {
         var result = this.els.filter(el -> ids.filter(id -> id == el.id).length > 0);
         return result;
     }
@@ -60,7 +60,7 @@ class StandardStaticStorage<M, IdType>
     /**
         Set and rewrite many records to storage by ids
     **/
-    public function setMany(data: Array<Stored<M, IdType>>): Void
+    public function setMany(data: Array<Entity<M, IdType>>): Void
     {
         for (i in 0...data.length) {
             var isExist = false;

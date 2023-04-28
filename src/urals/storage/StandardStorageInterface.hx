@@ -13,7 +13,7 @@ interface StandardStorageInterface<M, IdType>
     **/
     public function readMany(
         ids: Array<IdType>
-    ): Array<Stored<M, IdType>>;
+    ): Array<Entity<M, IdType>>;
 
     /**
         Add some data in the end of storage
@@ -30,5 +30,5 @@ interface StandardStorageInterface<M, IdType>
     /**
         Set and rewrite many records to storage by ids
     **/
-    public function setMany(data: Array<Stored<M, IdType>>): Void;
+    public function setMany(data: Array<Entity<M, IdType>>): Void;
 }

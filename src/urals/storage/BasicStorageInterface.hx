@@ -10,7 +10,7 @@ interface BasicStorageInterface<M, IdType>
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<Stored<M, IdType>>;
+    public function readAll(): Array<Entity<M, IdType>>;
 
     /**
         Rewrte all storage data

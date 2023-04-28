@@ -9,7 +9,7 @@ class BasicStaticStorage<M, Id>
     implements BasicStorageInterface<M, Id>
 {
     private var setId: SetIdFunc<M, Id> = null;
-    private var els: Array<Stored<M, Id>> = [];
+    private var els: Array<Entity<M, Id>> = [];
 
     public function new(
         setId: SetIdFunc<M, Id>
@@ -20,7 +20,7 @@ class BasicStaticStorage<M, Id>
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<Stored<M, Id>>
+    public function readAll(): Array<Entity<M, Id>>
     {
         var result = this.els;
         return result;

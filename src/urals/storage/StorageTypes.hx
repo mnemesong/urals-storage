@@ -3,7 +3,7 @@ package urals.storage;
 /**
     Type represents data contains in storage
 **/
-typedef Stored<M, IdType> = {
+typedef Entity<M, IdType> = {
     id: IdType,
     val: M
 };
@@ -12,7 +12,7 @@ typedef Stored<M, IdType> = {
     Type represents function triggers on some storage event
 **/
 typedef StorageTriggerFunc<M, IdType> = 
-    (data: Array<Stored<M, IdType>>) -> Void;
+    (data: Array<Entity<M, IdType>>) -> Void;
 
 /**
     Generates Id function type
@@ -20,4 +20,4 @@ typedef StorageTriggerFunc<M, IdType> =
 typedef SetIdFunc<M, Id> = (
     newData: Array<M>, 
     keepedDataIds: Array<Id>
-) -> Array<Stored<M, Id>>
+) -> Array<Entity<M, Id>>

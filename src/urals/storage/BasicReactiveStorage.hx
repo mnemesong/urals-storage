@@ -12,7 +12,7 @@ class BasicReactiveStorage<M, Id>
     private var setId: SetIdFunc<M, Id> = null;
     private var onChangeTrigger: StorageTriggerFunc<M, Id> = null;
     private var onReadTrigger: StorageTriggerFunc<M, Id> = null;
-    private var els: Array<Stored<M, Id>> = [];
+    private var els: Array<Entity<M, Id>> = [];
 
     public function new(
         setId: SetIdFunc<M, Id>,
@@ -27,7 +27,7 @@ class BasicReactiveStorage<M, Id>
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<Stored<M, Id>>
+    public function readAll(): Array<Entity<M, Id>>
     {
         var result = this.els;
         triggerOnRead();
