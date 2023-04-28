@@ -1,11 +1,11 @@
 package urals.storage;
 
-import urals.storage.UralsStorageTypes;
+import urals.storage.StorageTypes;
 
 /**
     Reactive storage interface
 **/
-interface UralsReactiveStorageInterface 
+interface ReactiveStorageInterface 
 {
     public function triggerOnChange(): Void;
 

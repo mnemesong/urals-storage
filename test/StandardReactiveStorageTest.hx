@@ -1,12 +1,12 @@
 package;
 
-import urals.storage.UralsIdGenFunctions.genIntId;
-import urals.storage.UralsStandardReactiveStorage;
+import urals.storage.IdGenFunctions.genIntId;
+import urals.storage.StandardReactiveStorage;
 import sneaker.assertion.Asserter.*;
 
 function test1() {
     var output = "";
-    var stor = new UralsStandardReactiveStorage(
+    var stor = new StandardReactiveStorage(
         genIntId,
         (els) -> {
             output = output + els
@@ -47,7 +47,7 @@ function test1() {
 
 function test2() {
     var output = "";
-    var stor = new UralsStandardReactiveStorage(
+    var stor = new StandardReactiveStorage(
         genIntId,
         (els) -> {
             output = output + els
@@ -88,7 +88,7 @@ function test2() {
 
 function test3() {
     var output = "";
-    var stor = new UralsStandardReactiveStorage(
+    var stor = new StandardReactiveStorage(
         genIntId,
         (els) -> {
             output = output + els

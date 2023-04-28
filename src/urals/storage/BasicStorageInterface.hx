@@ -1,16 +1,16 @@
 package urals.storage;
 
-import urals.storage.UralsStorageTypes;
+import urals.storage.StorageTypes;
 
 /**
     Interface of minimal storage
 **/
-interface UralsBasicStorageInterface<M, IdType>
+interface BasicStorageInterface<M, IdType>
 {
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<UralsStored<M, IdType>>;
+    public function readAll(): Array<Stored<M, IdType>>;
 
     /**
         Rewrte all storage data

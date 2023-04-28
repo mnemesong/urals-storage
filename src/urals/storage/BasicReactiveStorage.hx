@@ -1,23 +1,23 @@
 package urals.storage;
 
-import urals.storage.UralsStorageTypes;
+import urals.storage.StorageTypes;
 
 /**
     Basic storage triggers function of set and read data
 **/
-class UralsBasicReactiveStorage<M, Id> 
-    implements UralsBasicStorageInterface<M, Id>
-    implements UralsReactiveStorageInterface
+class BasicReactiveStorage<M, Id> 
+    implements BasicStorageInterface<M, Id>
+    implements ReactiveStorageInterface
 {
-    private var setId: UralsSetIdFunc<M, Id> = null;
-    private var onChangeTrigger: UralsStorageTriggerFunc<M, Id> = null;
-    private var onReadTrigger: UralsStorageTriggerFunc<M, Id> = null;
-    private var els: Array<UralsStored<M, Id>> = [];
+    private var setId: SetIdFunc<M, Id> = null;
+    private var onChangeTrigger: StorageTriggerFunc<M, Id> = null;
+    private var onReadTrigger: StorageTriggerFunc<M, Id> = null;
+    private var els: Array<Stored<M, Id>> = [];
 
     public function new(
-        setId: UralsSetIdFunc<M, Id>,
-        onSetTrigger: UralsStorageTriggerFunc<M, Id> = null, 
-        onReadTrigger: UralsStorageTriggerFunc<M, Id> = null
+        setId: SetIdFunc<M, Id>,
+        onSetTrigger: StorageTriggerFunc<M, Id> = null, 
+        onReadTrigger: StorageTriggerFunc<M, Id> = null
     ) {
         this.onChangeTrigger = onSetTrigger;
         this.onReadTrigger = onReadTrigger;
@@ -27,7 +27,7 @@ class UralsBasicReactiveStorage<M, Id>
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<UralsStored<M, Id>>
+    public function readAll(): Array<Stored<M, Id>>
     {
         var result = this.els;
         triggerOnRead();

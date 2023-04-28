@@ -1,12 +1,12 @@
 package;
 
-import urals.storage.UralsIdGenFunctions.genUuidId;
-import urals.storage.UralsIdGenFunctions.genIntId;
-import urals.storage.UralsBasicStaticStorage;
+import urals.storage.IdGenFunctions.genUuidId;
+import urals.storage.IdGenFunctions.genIntId;
+import urals.storage.BasicStaticStorage;
 import sneaker.assertion.Asserter.*;
 
 function test1() {
-    var stor = new UralsBasicStaticStorage(
+    var stor = new BasicStaticStorage(
         genUuidId
     );
     stor.reInit(["alala", "blablabla", "ohoho"]);

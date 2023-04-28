@@ -1,12 +1,12 @@
 package;
 
-import urals.storage.UralsIdGenFunctions.genIntId;
-import urals.storage.UralsBasicReactiveStorage;
+import urals.storage.IdGenFunctions.genIntId;
+import urals.storage.BasicReactiveStorage;
 import sneaker.assertion.Asserter.*;
 
 function test1() {
     var output = "";
-    var stor = new UralsBasicReactiveStorage(
+    var stor = new BasicReactiveStorage(
         genIntId,
         (els) -> {
             output = output + els

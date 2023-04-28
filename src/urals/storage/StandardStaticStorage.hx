@@ -1,24 +1,24 @@
 package urals.storage;
 
-import urals.storage.UralsStorageTypes;
+import urals.storage.StorageTypes;
 
 /**
     class implements static storage type
 **/
-class UralsStandardStaticStorage<M, IdType> 
-    implements UralsStandardStorageInterface<M, IdType>
+class StandardStaticStorage<M, IdType> 
+    implements StandardStorageInterface<M, IdType>
 {
-    private var setIds: UralsSetIdFunc<M, IdType> = null;
-    private var els: Array<UralsStored<M, IdType>> = [];
+    private var setIds: SetIdFunc<M, IdType> = null;
+    private var els: Array<Stored<M, IdType>> = [];
 
-    public function new(setId: UralsSetIdFunc<M, IdType>) {
+    public function new(setId: SetIdFunc<M, IdType>) {
         this.setIds = setId;
     }
 
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<UralsStored<M, IdType>>
+    public function readAll(): Array<Stored<M, IdType>>
     {
         var result = this.els;
         return result;
@@ -29,7 +29,7 @@ class UralsStandardStaticStorage<M, IdType>
     **/
     public function readMany(
         ids: Array<IdType>
-    ): Array<UralsStored<M, IdType>> {
+    ): Array<Stored<M, IdType>> {
         var result = this.els.filter(el -> ids.filter(id -> id == el.id).length > 0);
         return result;
     }
@@ -60,7 +60,7 @@ class UralsStandardStaticStorage<M, IdType>
     /**
         Set and rewrite many records to storage by ids
     **/
-    public function setMany(data: Array<UralsStored<M, IdType>>): Void
+    public function setMany(data: Array<Stored<M, IdType>>): Void
     {
         for (i in 0...data.length) {
             var isExist = false;

@@ -1,18 +1,18 @@
 package urals.storage;
 
-import urals.storage.UralsStorageTypes;
+import urals.storage.StorageTypes;
 
 /**
     Mininal basic static storage
 **/
-class UralsBasicStaticStorage<M, Id> 
-    implements UralsBasicStorageInterface<M, Id>
+class BasicStaticStorage<M, Id> 
+    implements BasicStorageInterface<M, Id>
 {
-    private var setId: UralsSetIdFunc<M, Id> = null;
-    private var els: Array<UralsStored<M, Id>> = [];
+    private var setId: SetIdFunc<M, Id> = null;
+    private var els: Array<Stored<M, Id>> = [];
 
     public function new(
-        setId: UralsSetIdFunc<M, Id>
+        setId: SetIdFunc<M, Id>
     ) {
         this.setId = setId;
     }
@@ -20,7 +20,7 @@ class UralsBasicStaticStorage<M, Id>
     /**
         Read all data from storage
     **/
-    public function readAll(): Array<UralsStored<M, Id>>
+    public function readAll(): Array<Stored<M, Id>>
     {
         var result = this.els;
         return result;
